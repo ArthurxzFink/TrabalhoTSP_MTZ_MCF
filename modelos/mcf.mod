@@ -14,7 +14,7 @@ subject to saida {i in 1..n}:
     sum{j in 1..n : j != i} x[i,j] = 1;
 
 subject to origem {k in 2..n}:
-    sum{j in 1..n : j != 1} f[1,j,k]-sum{j in 1..n : j != 1}f[j,i,k] = 1;
+    sum{j in 1..n : j != 1} f[1,j,k]-sum{j in 1..n : j != 1} f[j,1,k] = 1;
 
 subject to destino {k in 2..n}:
     sum{j in 1..n : j != k} f[k,j,k] - sum{j in 1..n : j != k} f[j,k,k] = -1;
