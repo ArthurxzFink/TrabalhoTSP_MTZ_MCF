@@ -4,7 +4,7 @@ param d{i in 1..n, j in 1..n : i != j} >= 0;
 var x{i in 1..n, j in 1..n : i != j} binary;
 var u{i in 1..n} integer >=1 , <= n-1;
 
-minimize z:
+minimize Z:
     sum{i in 1..n, j in 1..n : i!=j} d[i,j]*x[i,j];
 
 subject to entrada {j in 1..n}:
