@@ -14,6 +14,18 @@ cidade = list(dados.values())
 
 
 #Cidade mais próxima da atual
+def distancia_caminho(caminho, coordenadas):
+    total = 0
+
+    for origem, destino in zip(caminho, caminho[1:]):
+        total += cdist(
+            [coordenadas[origem]],
+            [coordenadas[destino]],
+            metric="euclidean",
+        )[0][0]
+
+    return total
+    
 def modelo_vizinho(inicio, coordenadas):
     caminho = [inicio]
     visitadas = {inicio}
@@ -45,12 +57,21 @@ def vizinho_mais_proximo_multistart(coordenadas):
     melhor_caminho = None
     melhor_distancia = float("inf")
 
-    for inicio in coordenadas.keys():
+    for inicio in coordenadas:
         caminho = modelo_vizinho(inicio, coordenadas)
-        
+        distancia = distancia_caminho(caminho, coordenadas)
+
+        if distancia < melhor_distancia:
+            melhor_caminho = caminho
+            melhor_distancia = distancia
+    return  int(melhor_distancia)
 
 
-
-caminho = modelo_vizinho(1, dados.node_coords)
-
-print(caminho)
+teste1 = vizinho_mais_proximo_multistart(dados["berlin52"])
+teste2 = vizinho_mais_proximo_multistart(dados["ch150"])
+teste3 = vizinho_mais_proximo_multistart(dados["kroA100"])
+teste4 = vizinho_mais_proximo_multistart(dados["kroB200"])
+print(teste1)
+print(teste2)
+print(teste3)
+print(teste4)
